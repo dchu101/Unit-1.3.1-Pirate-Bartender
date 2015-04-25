@@ -1,3 +1,5 @@
+import random
+
 questions = {
   "strong":"Do ye want a strong boozy drink? ", 
   "salty":"Do ye prefer a bit of the salt of the sea? ", 
@@ -17,40 +19,23 @@ ingredients = {
 preferences ={}
 
 def bartender():
-  input = raw_input(questions["strong"])
-  if input=="Yes" or input=="yes" or input =="Y" or input=="y":
-    preferences["strong"] = True
-  else:
-    preferences["strong"] = False
-
-  input = raw_input(questions["salty"])
-  if input=="Yes" or input=="yes" or input =="Y" or input=="y":
-    preferences["salty"] = True
-  else:
-    preferences["salty"] = False
-
-  input = raw_input(questions["bitter"])
-  if input=="Yes" or input=="yes" or input =="Y" or input=="y":
-    preferences["bitter"] = True
-  else:
-    preferences["bitter"] = False
-
-  input = raw_input(questions["sweet"])
-  if input=="Yes" or input=="yes" or input =="Y" or input=="y":
-    preferences["sweet"] = True
-  else:
-    preferences["sweet"] = False
-    
-  input = raw_input(questions["fruity"])
-  if input=="Yes" or input=="yes" or input =="Y" or input=="y":
-    preferences["fruity"] = True
-  else:
-    preferences["fruity"] = False
-    
-"""def make_drink(**preferences)
-  import random
+    for choice, question in questions.iteritems():
+        user_input = raw_input(question.lower())
+        #iteritem() turns a dictionary into tuple pairs
+        preferences[choice] = user_input[:1] == "y"
+        
+def make_drink():
+    drink=[]
   
-  drink=[]
-  
-  if strong == True:
-    drink.append(random.choice(ingredients("strong")))"""
+    for taste, answer in preferences.iteritems():
+        if answer:
+            drink.append(random.choice(ingredients[taste]))
+    print(drink)
+
+    
+if __name__ == '__main__':
+    bartender()
+    make_drink()
+
+
+
